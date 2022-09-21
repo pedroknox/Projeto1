@@ -13,58 +13,43 @@ import {
   TerceiraDiv,
   TextoDiv3,
 } from "./style";
+import { useHome } from "./useHome";
 
 const Home = () => {
+  const { url, setUrl, downloadVideo, videos } = useHome();
   return (
     <div>
       <ContainerDiv>
         <PrimeiraDiv>
           <CardDiv>
             <TextoDiv1>
-              Olá, me chamo Alex Spencer e eu amo construir websites lindos
+              <input
+                type="text"
+                onChange={(e) => setUrl(e.currentTarget.value)}
+              />
             </TextoDiv1>
+            {videos.map((v, i) => (
+              <div
+                key={`videos_${i}`}
+                style={{ display: "flex", flexDirection: "row", gap: `20px` }}
+              >
+                <p>{v.width}</p>
+                <p>{v.fps}</p>
+                <p>{v.mimeType}</p>
+                <a href={v.url} download="video">
+                  download
+                </a>
+              </div>
+            ))}
             <Button
               variant="primary"
               text="SOBRE MIM"
-              onClick={() => {}}
+              onClick={() => {
+                downloadVideo();
+              }}
             ></Button>
           </CardDiv>
         </PrimeiraDiv>
-        <SegundaDiv>
-          <FotoDiv>
-            <span></span>
-          </FotoDiv>
-          <CardDiv2>
-            <SobreMimDiv>Sobre mim</SobreMimDiv>
-            <TextoDiv2>
-              Sou um desenvolvedor front-end júnior procurando por uma
-              oportunidade. Eu foco em escrever HTML acessível, usando práticas
-              modernas de CSS e escrevendo um JavaScript limpo. Quando estou
-              escrevendo código JavaScript, na maioria das vezes estou usando
-              React, mas posso me adaptar para qualquer ferramenta se
-              necessário. Moro em Londres, UK, mas também seria feliz
-              trabalhando remotamente e tenho experiência em times remotos.
-              Quando não estou codando, poderá me achar fora de casa. Eu adoro
-              estar próximo a natureza seja para uma caminhada, corrida ou
-              ciclismo. Eu amaria se você desse uma olhada no meu trabalho.
-            </TextoDiv2>
-            <BotaoDiv2>
-              <Button
-                variant="secondary2"
-                text="IR PARA PORTFOLIO"
-                onClick={() => {}}
-              ></Button>
-            </BotaoDiv2>
-          </CardDiv2>
-        </SegundaDiv>
-        <TerceiraDiv>
-          <TextoDiv3>Interessado em fazer projetos comigo?</TextoDiv3>
-          <Button
-            variant="secondary2"
-            text="CONTATO"
-            onClick={() => {}}
-          ></Button>
-        </TerceiraDiv>
       </ContainerDiv>
     </div>
   );
